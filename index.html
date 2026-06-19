@@ -3,47 +3,361 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Helperbot - Tu Asistente Virtual</title>
+    <title>HelperBot - Sistema Inteligente de Monitoreo Escolar</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1 class="title">Helperbot</h1>
-            <p class="subtitle">Tu Asistente Virtual Inteligente</p>
-        </header>
+    <!-- Navegación -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">🤖 HelperBot</div>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#problema">El Problema</a></li>
+                <li><a href="#solucion">Solución</a></li>
+                <li><a href="#componentes">Componentes</a></li>
+                <li><a href="#impacto">Impacto</a></li>
+            </ul>
+        </div>
+    </nav>
 
-        <main>
-            <section class="welcome-section">
-                <h2 class="welcome-title">¡Bienvenido a Helperbot!</h2>
-                <p class="welcome-text">
-                    Helperbot es tu asistente virtual de confianza, diseñado para ayudarte con tus tareas 
-                    y responder tus preguntas de manera rápida y eficiente.
-                </p>
-                
-                <button class="btn-main" onclick="ingresarPagina()">
-                    Ingresar a Helperbot
-                </button>
-            </section>
+    <!-- Hero Section -->
+    <header id="inicio" class="hero">
+        <div class="hero-content">
+            <h1 class="main-title">HelperBot</h1>
+            <p class="main-subtitle">Sistema Inteligente para el Monitoreo de Rutinas, Responsabilidades y Bienestar Escolar</p>
+            <p class="tagline">Formando hábitos, fortaleciendo autonomía, transformando la educación</p>
+            <button class="cta-button" onclick="scrollToSection('solucion')">Descubre la Solución</button>
+        </div>
+    </header>
 
-            <section class="info-section">
-                <h3>Información de Prueba</h3>
-                <p>
-                    Esta es una página de prueba para Helperbot. Aquí irá la información principal de la aplicación.
-                    Por el momento, estamos configurando la interfaz base para que puedas comenzar a utilizar
-                    todas las funcionalidades que Helperbot tiene para ofrecerte.
-                </p>
-                <p>
-                    En futuras actualizaciones, añadiremos más características y funcionalidades para mejorar 
-                    tu experiencia de usuario.
-                </p>
-            </section>
-        </main>
+    <!-- Situación Problemática -->
+    <section id="problema" class="section problem-section">
+        <div class="container">
+            <h2>La Situación Actual</h2>
+            <p class="section-intro">¿Cuál es el desafío que enfrentamos?</p>
+            
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <div class="icon">📝</div>
+                    <h3>Dependencia del Adulto</h3>
+                    <p>Los estudiantes dependen constantemente de recordatorios de los docentes para cumplir rutinas.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="icon">🔄</div>
+                    <h3>Hábitos Inconsistentes</h3>
+                    <p>Dificultad para consolidar hábitos sostenibles y autonomía en el cumplimiento de responsabilidades.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="icon">👥</div>
+                    <h3>Falta de Seguimiento</h3>
+                    <p>Los roles estudiantiles carecen de mecanismos claros de seguimiento y retroalimentación.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="icon">📊</div>
+                    <h3>Información Limitada</h3>
+                    <p>Registros informales del estado emocional y patrones de comportamiento para la tutoría.</p>
+                </div>
+            </div>
 
-        <footer>
-            <p>&copy; 2026 Helperbot. Todos los derechos reservados.</p>
-        </footer>
-    </div>
+            <div class="challenge-box">
+                <h3>🎯 La Pregunta Retadora</h3>
+                <p>¿Cómo podríamos fortalecer la autonomía, la responsabilidad y los hábitos escolares de los estudiantes mediante un sistema de monitoreo simple, participativo y basado en datos?</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solución -->
+    <section id="solucion" class="section solution-section">
+        <div class="container">
+            <h2>Nuestra Solución</h2>
+            <p class="section-intro">HelperBot: Sistema de Datos para la Formación de Hábitos y Autonomía Escolar</p>
+            
+            <div class="solution-box">
+                <div class="solution-text">
+                    <h3>¿Qué es HelperBot?</h3>
+                    <p>HelperBot es un sistema de monitoreo tutorial que recopila información en tiempo real sobre aspectos clave de la vida escolar, permitiendo que los estudiantes desarrollen autonomía y responsabilidad mientras los docentes cuentan con datos para la toma de decisiones pedagógicas.</p>
+                    
+                    <h4>Monitoreamos:</h4>
+                    <ul class="monitoring-list">
+                        <li>✨ <strong>Bienestar Emocional:</strong> Estado emocional de los estudiantes en tres momentos del día</li>
+                        <li>✅ <strong>Rutinas Escolares:</strong> Cumplimiento de hábitos y responsabilidades</li>
+                        <li>👥 <strong>Roles y Responsabilidades:</strong> Desempeño de los Helpers</li>
+                        <li>📍 <strong>Permanencia en el Aula:</strong> Patrones de salidas y necesidades de acompañamiento</li>
+                    </ul>
+                </div>
+                <div class="solution-image">
+                    <div class="emoji-large">🤖</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Componentes -->
+    <section id="componentes" class="section components-section">
+        <div class="container">
+            <h2>Los 4 Componentes del Sistema</h2>
+            
+            <div class="components-grid">
+                <!-- Componente 1 -->
+                <div class="component-card">
+                    <div class="component-icon">😊</div>
+                    <h3>Bienestar Emocional</h3>
+                    <p class="component-subtitle">3 momentos clave del día</p>
+                    <div class="component-content">
+                        <div class="moment">
+                            <strong>📥 Ingreso:</strong> ¿Cómo me siento hoy?
+                        </div>
+                        <div class="moment">
+                            <strong>☀️ Receso:</strong> ¿Cómo va mi día?
+                        </div>
+                        <div class="moment">
+                            <strong>📤 Salida:</strong> ¿Cómo me voy hoy?
+                        </div>
+                        <div class="emotions">
+                            <span class="emotion">😀 Feliz</span>
+                            <span class="emotion">😌 Tranquilo</span>
+                            <span class="emotion">😟 Preocupado</span>
+                            <span class="emotion">😠 Molesto</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Componente 2 -->
+                <div class="component-card">
+                    <div class="component-icon">✅</div>
+                    <h3>Rutinas Escolares</h3>
+                    <p class="component-subtitle">Consolidando hábitos diarios</p>
+                    <div class="component-content">
+                        <div class="routine-group">
+                            <strong>🌅 Inicio:</strong>
+                            <ul>
+                                <li>Fecha visible</li>
+                                <li>Mochilas ordenadas</li>
+                                <li>Aula limpia</li>
+                            </ul>
+                        </div>
+                        <div class="routine-group">
+                            <strong>📚 Durante el día:</strong>
+                            <ul>
+                                <li>Entrega de tareas</li>
+                                <li>Cuidado de materiales</li>
+                                <li>Cumplimiento de acuerdos</li>
+                            </ul>
+                        </div>
+                        <div class="routine-group">
+                            <strong>🌙 Cierre:</strong>
+                            <ul>
+                                <li>Aula ordenada</li>
+                                <li>Luces apagadas</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Componente 3 -->
+                <div class="component-card">
+                    <div class="component-icon">👥</div>
+                    <h3>Los Helpers</h3>
+                    <p class="component-subtitle">Roles estudiantiles con propósito</p>
+                    <div class="component-content">
+                        <div class="helper-role">
+                            <strong>🗂️ Helper de Organización</strong>
+                        </div>
+                        <div class="helper-role">
+                            <strong>🌱 Helper Ambiental</strong>
+                        </div>
+                        <div class="helper-role">
+                            <strong>🧹 Helper de Limpieza</strong>
+                        </div>
+                        <div class="helper-role">
+                            <strong>📦 Helper de Materiales</strong>
+                        </div>
+                        <div class="helper-role">
+                            <strong>🤝 Helper de Convivencia</strong>
+                        </div>
+                        <div class="helper-role">
+                            <strong>💚 Helper de Bienestar</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Componente 4 -->
+                <div class="component-card">
+                    <div class="component-icon">📍</div>
+                    <h3>Control de Salidas</h3>
+                    <p class="component-subtitle">Identificando patrones de comportamiento</p>
+                    <div class="component-content">
+                        <div class="exit-reason">
+                            <strong>🚻 Baño</strong>
+                        </div>
+                        <div class="exit-reason">
+                            <strong>🏥 Enfermería</strong>
+                        </div>
+                        <div class="exit-reason">
+                            <strong>📋 Coordinación</strong>
+                        </div>
+                        <div class="exit-reason">
+                            <strong>📚 Biblioteca</strong>
+                        </div>
+                        <div class="exit-reason">
+                            <strong>🏢 Secretaría</strong>
+                        </div>
+                        <p class="info-text">Registramos frecuencia, tiempo y patrones para atención temprana.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Implementación -->
+    <section class="section implementation-section">
+        <div class="container">
+            <h2>Plan de Implementación</h2>
+            <p class="section-intro">3 Fases Progresivas</p>
+            
+            <div class="phases-grid">
+                <div class="phase-card phase-1">
+                    <div class="phase-number">1</div>
+                    <h3>Fase Piloto</h3>
+                    <p class="phase-duration">1 mes</p>
+                    <div class="phase-content">
+                        <p><strong>Se monitorea:</strong></p>
+                        <ul>
+                            <li>😊 Emociones</li>
+                            <li>✅ Rutinas</li>
+                            <li>👥 Helpers</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="phase-card phase-2">
+                    <div class="phase-number">2</div>
+                    <h3>Consolidación</h3>
+                    <p class="phase-duration">2 meses</p>
+                    <div class="phase-content">
+                        <p><strong>Se incorporan:</strong></p>
+                        <ul>
+                            <li>📦 Materiales</li>
+                            <li>📝 Entrega de tareas</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="phase-card phase-3">
+                    <div class="phase-number">3</div>
+                    <h3>Expansión</h3>
+                    <p class="phase-duration">2 meses</p>
+                    <div class="phase-content">
+                        <p><strong>Se incorpora:</strong></p>
+                        <ul>
+                            <li>📍 Registro de salidas</li>
+                            <li>📊 Reportes automáticos</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Indicadores -->
+    <section class="section indicators-section">
+        <div class="container">
+            <h2>Indicadores de Éxito</h2>
+            <p class="section-intro">Medimos el impacto con datos concretos</p>
+            
+            <div class="indicators-grid">
+                <div class="indicator-box">
+                    <div class="indicator-icon">🎯</div>
+                    <h3>Autonomía</h3>
+                    <p>% de estudiantes que cumplen rutinas sin recordatorios</p>
+                </div>
+                <div class="indicator-box">
+                    <div class="indicator-icon">🏢</div>
+                    <h3>Organización</h3>
+                    <p>% de cumplimiento de rutinas escolares</p>
+                </div>
+                <div class="indicator-box">
+                    <div class="indicator-icon">💪</div>
+                    <h3>Responsabilidad</h3>
+                    <p>% de cumplimiento de funciones de los Helpers</p>
+                </div>
+                <div class="indicator-box">
+                    <div class="indicator-icon">💚</div>
+                    <h3>Bienestar</h3>
+                    <p>Variación positiva del estado emocional</p>
+                </div>
+                <div class="indicator-box">
+                    <div class="indicator-icon">📍</div>
+                    <h3>Permanencia</h3>
+                    <p>Frecuencia de salidas y tiempo fuera del aula</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impacto Esperado -->
+    <section id="impacto" class="section impact-section">
+        <div class="container">
+            <h2>Impacto Esperado</h2>
+            
+            <div class="impact-grid">
+                <div class="impact-card">
+                    <div class="impact-icon">👨‍🎓</div>
+                    <h3>En los Estudiantes</h3>
+                    <ul>
+                        <li>✓ Mayor autonomía</li>
+                        <li>✓ Desarrollo de hábitos</li>
+                        <li>✓ Mayor responsabilidad</li>
+                        <li>✓ Mejor autorregulación emocional</li>
+                    </ul>
+                </div>
+
+                <div class="impact-card">
+                    <div class="impact-icon">👨‍🏫</div>
+                    <h3>En los Docentes</h3>
+                    <ul>
+                        <li>✓ Evidencias para la tutoría</li>
+                        <li>✓ Seguimiento más eficiente</li>
+                        <li>✓ Toma de decisiones basada en datos</li>
+                    </ul>
+                </div>
+
+                <div class="impact-card">
+                    <div class="impact-icon">🏫</div>
+                    <h3>En la Cultura Escolar</h3>
+                    <ul>
+                        <li>✓ Fortalecimiento de rutinas</li>
+                        <li>✓ Mayor participación estudiantil</li>
+                        <li>✓ Cultura de mejora continua</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="value-proposition">
+                <h3>✨ Nuestra Propuesta de Valor</h3>
+                <p>HelperBot transforma las rutinas escolares en oportunidades de aprendizaje y crecimiento personal, permitiendo que los estudiantes desarrollen hábitos de autonomía y responsabilidad mientras los docentes cuentan con información oportuna para acompañar su desarrollo integral.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section class="section cta-final">
+        <div class="container">
+            <h2>¿Listo para Transformar tu Institución?</h2>
+            <p>HelperBot: Sistema de Datos para la Formación de Hábitos y Autonomía Escolar</p>
+            <button class="cta-button-large">Contáctanos para más información</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 HelperBot - Proyecto de Innovación Educativa</p>
+            <p>Área de Intervención: Tutoría y Cultura Escolar</p>
+            <p>Población Beneficiaria: Estudiantes de primaria y secundaria</p>
+        </div>
+    </footer>
 
     <script src="script.js"></script>
 </body>
