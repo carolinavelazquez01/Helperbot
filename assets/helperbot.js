@@ -1,15 +1,14 @@
 /* helperbot.js
-  Uso:
-  - Incluye /assets/helperbot.css y /assets/helperbot.js en tu página.
-  - Coloca /assets/helperbot.svg o cambia la ruta en helperbot.html.
-  - Por defecto funciona localmente (reglas simples).
-  - Para "inteligencia" real: crea un endpoint servidor /api/assistant que llame a la API de OpenAI
-    y devuelva respuestas; NO pongas la API key en el cliente.
+  Mejoras:
+  - Robustez si el markup no está presente
+  - Accesibilidad: focus management, keyboard support, aria updates
+  - Reemplaza el mensaje "Pensando…" en lugar de apilar múltiples
+  - Soporta backend /api/assistant si existe
 */
 
 (() => {
   const bubble = document.getElementById('helperBubble');
-  const helperImg = document.getElementById('helperImg');
+  const helperImgBtn = document.getElementById('helperImgBtn');
   const helperClose = document.getElementById('helperClose');
   const openChat = document.getElementById('openChat');
   const panel = document.getElementById('helperPanel');
@@ -18,8 +17,15 @@
   const panelForm = document.getElementById('panelForm');
   const panelInput = document.getElementById('panelInput');
 
+  if (!panelBody || !panelForm || !panelInput) {
+    // Required elements are missing; abort silently
+    console.warn('HelperBot: elementos del DOM faltantes — widget no inicializado.');
+    return;
+  }
+
   // Conversación persistente
-  let convo = JSON.parse(localStorage.getItem('helperbot_convo') || '[]');
+  let convo = [];
+  try { convo = JSON.parse(localStorage.getItem('helperbot_convo') || '[]'); } catch (e) { convo = []; }
 
   function renderConvo() {
     panelBody.innerHTML = '';
@@ -32,23 +38,32 @@
     panelBody.scrollTop = panelBody.scrollHeight;
   }
 
-  function addMessage(role, text) {
-    convo.push({ role, text, t: Date.now() });
-    localStorage.setItem('helperbot_convo', JSON.stringify(convo));
-    renderConvo();
+  function saveConvo() {
+    try { localStorage.setItem('helperbot_convo', JSON.stringify(convo)); } catch (e) { /* ignore */ }
+  }
+
+  function addMessage(role, text, options = {}) {
+    // If last message is a temporary "loading" placeholder from bot, replace it
+    if (role === 'bot' && convo.length > 0) {
+      const last = convo[convo.length - 1];
+      if (last && last._loading) {
+        convo[convo.length - 1] = { role, text, t: Date.now() };
+        saveConvo(); renderConvo(); return;
+      }
+    }
+    convo.push({ role, text, t: Date.now(), ...(options.loading ? { _loading: true } : {}) });
+    saveConvo(); renderConvo();
   }
 
   // Preguntas iniciales simples (puedes personalizar)
   function onQuickAnswer(ans) {
     addMessage('user', ans);
-    // Respuesta local simple
     const localResp = localReply(ans);
     addMessage('bot', localResp);
   }
 
   function localReply(text) {
-    // Reglas simples para respuestas rápidas (modo offline)
-    text = text.toLowerCase();
+    text = String(text).toLowerCase();
     if (text.includes('feliz') || text.includes('tranquilo')) {
       return '¡Qué bueno! Si necesitas compartir algo más, cuéntame.';
     }
@@ -58,76 +73,72 @@
     if (text.includes('salida') || text.includes('permane')) {
       return 'Puedo registrar salidas y frecuencia. ¿Quieres dejar una nota?';
     }
-    // fallback
     return 'Interesante. ¿Quieres que te pregunte algo sobre rutinas, roles o permanencia?';
   }
 
-  // Chat -> intenta usar servicio remoto si existe, si no usa reglas locales
+  // Try backend, else fallback local
   async function askAssistant(prompt) {
-    // Llamada a backend recomendada (no exponer API key en cliente)
-    // Se asume que /api/assistant acepta JSON {prompt: "..."} y responde {reply: "..."}
+    // show loading placeholder
+    addMessage('bot', 'Pensando…', { loading: true });
     try {
       const res = await fetch('/api/assistant', {
         method: 'POST',
-        headers: {'Content-Type':'application/json'},
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt })
       });
       if (!res.ok) throw new Error('No backend');
       const data = await res.json();
-      if (data && data.reply) return data.reply;
-      throw new Error('Respuesta inesperada');
+      const reply = data && data.reply ? data.reply : localReply(prompt);
+      addMessage('bot', reply);
     } catch (e) {
-      // Fallback local
-      return localReply(prompt);
+      // fallback local
+      const reply = localReply(prompt);
+      addMessage('bot', reply);
     }
   }
 
-  // Event listeners
+  // Event listeners for quick buttons
   document.querySelectorAll('.quick-btn').forEach(b => {
-    b.addEventListener('click', (ev) => {
-      ev.preventDefault();
-      const ans = b.getAttribute('data-answer');
-      onQuickAnswer(ans);
+    b.addEventListener('click', (ev) => { ev.preventDefault(); const ans = b.getAttribute('data-answer'); onQuickAnswer(ans); });
+    b.addEventListener('keydown', (ev) => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); b.click(); } });
+  });
+
+  // helper image button toggles bubble
+  if (helperImgBtn && bubble) {
+    helperImgBtn.addEventListener('click', () => {
+      const visible = bubble.style.display !== 'none' && bubble.style.display !== '';
+      bubble.style.display = visible ? 'none' : 'block';
     });
-  });
+  }
 
-  helperImg.addEventListener('click', () => {
-    // Mostrar/ocultar burbuja
-    const visible = bubble.style.display !== 'none';
-    bubble.style.display = visible ? 'none' : 'block';
-  });
+  if (helperClose && bubble) helperClose.addEventListener('click', () => bubble.style.display = 'none');
 
-  helperClose.addEventListener('click', () => bubble.style.display = 'none');
-
-  openChat.addEventListener('click', (e) => {
-    e.preventDefault();
-    panel.setAttribute('aria-hidden', 'false');
-    renderConvo();
-  });
-
-  panelClose.addEventListener('click', () => {
-    panel.setAttribute('aria-hidden', 'true');
-  });
+  if (openChat && panel) openChat.addEventListener('click', (e) => { e.preventDefault(); openPanel(); });
+  if (panelClose) panelClose.addEventListener('click', () => closePanel());
 
   panelForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const text = panelInput.value.trim();
-    if (!text) return;
+    const text = panelInput.value.trim(); if (!text) return;
     addMessage('user', text);
     panelInput.value = '';
-    addMessage('bot', 'Pensando…');
-    // ask assistant
-    const reply = await askAssistant(text);
-    // Replace last "Pensando…" with reply
-    // (Simpler: add reply)
-    addMessage('bot', reply);
+    await askAssistant(text);
   });
 
-  // cargar conversacion inicial si vacía
-  if (convo.length === 0) {
-    addMessage('bot', 'Hola, soy HelperBot. ¿Cómo te sientes hoy en clase?');
-  } else {
+  // Keyboard support: Esc to close panel/bubble, Ctrl+K to focus input
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') { closePanel(); if (bubble) bubble.style.display = 'none'; }
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); openPanel(true); }
+  });
+
+  function openPanel(focusInput = false) {
+    if (!panel) return;
+    panel.setAttribute('aria-hidden', 'false');
     renderConvo();
+    if (focusInput) setTimeout(() => panelInput.focus(), 50);
   }
+  function closePanel() { if (!panel) return; panel.setAttribute('aria-hidden', 'true'); }
+
+  // initialize conversation
+  if (convo.length === 0) addMessage('bot', 'Hola, soy HelperBot. ¿Cómo te sientes hoy en clase?'); else renderConvo();
 
 })();

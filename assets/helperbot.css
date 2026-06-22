@@ -1,5 +1,5 @@
 /* helperbot.css
-   Basado en el estilo Don Quixote provisto, adaptado para HelperBot.
+   Mejoras: responsive, contraste, y accesibilidad
 */
 :root{
   --navy:#1a3a6b;
@@ -68,7 +68,7 @@
   font-weight:700;
   font-size:0.78rem;
 }
-.quick-btn:hover { background: var(--navy); color: var(--white); }
+.quick-btn:hover, .quick-btn:focus { background: var(--navy); color: var(--white); outline: none; }
 
 /* Botón de ayuda dentro de la burbuja */
 .help-btn {
@@ -83,13 +83,20 @@
   text-decoration: none;
   transition: background 0.15s;
 }
-.help-btn:hover { background: var(--green); }
+.help-btn:hover, .help-btn:focus { background: var(--green); outline: none; }
 
-/* Imagen del bot */
+/* Imagen del bot (envoltorio accesible) */
+.helper-img-btn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
 .helper-img {
-  width: 110px;
+  width: 96px;
   height: auto;
-  filter: drop-shadow(0 6px 18px rgba(0,0,0,0.18));
+  filter: drop-shadow(0 6px 18px rgba(0,0,0,0.12));
   transition: transform 0.25s ease;
   cursor: pointer;
   animation: helper-float 3s ease-in-out infinite;
@@ -99,7 +106,7 @@
   0%,100% { transform: translateY(0px); }
   50% { transform: translateY(-6px); }
 }
-.helper-img:hover { animation:none; transform: scale(1.06) rotate(-3deg); }
+.helper-img:hover { animation:none; transform: scale(1.04) rotate(-2deg); }
 
 /* Panel de chat */
 .helper-panel{
@@ -161,4 +168,15 @@
   border-radius:999px;
   cursor:pointer;
   font-weight:700;
+}
+
+/* Contraste (reduce motion) */
+@media (prefers-reduced-motion: reduce) {
+  .helper-img, .helper-bubble { animation: none !important; }
+}
+
+@media (max-width: 600px) {
+  .helper-panel { width: calc(100vw - 48px); right: 12px; }
+  .helper-img { width: 80px; }
+  .helper-wrap { bottom: 18px; right: 12px; }
 }
