@@ -1,0 +1,164 @@
+/* helperbot.css
+   Basado en el estilo Don Quixote provisto, adaptado para HelperBot.
+*/
+:root{
+  --navy:#1a3a6b;
+  --green:#2bb673;
+  --white:#ffffff;
+  --gray:#7a8191;
+}
+
+/* Contenedor flotante */
+.helper-wrap {
+  position: fixed;
+  bottom: 80px;
+  right: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  z-index: 9999;
+  font-family: 'Nunito', sans-serif;
+}
+
+/* Burbuja inicial */
+.helper-bubble {
+  background: var(--white);
+  border: 2px solid var(--navy);
+  border-radius: 16px 16px 4px 16px;
+  padding: 10px 28px 10px 14px;
+  max-width: 240px;
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: var(--navy);
+  line-height: 1.4;
+  box-shadow: 0 4px 18px rgba(26,58,107,0.12);
+  position: relative;
+  cursor: default;
+  animation: bubble-in 0.35s ease both;
+}
+
+.bubble-close {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  color: var(--gray);
+  cursor: pointer;
+  line-height: 1;
+  padding: 0 2px;
+}
+.bubble-close:hover { color: var(--navy); }
+@keyframes bubble-in {
+  from { opacity:0; transform: translateY(8px) scale(0.98); }
+  to   { opacity:1; transform: translateY(0) scale(1); }
+}
+.helper-bubble strong { color: var(--green); display:block; margin-bottom:6px; }
+
+.quick-btn {
+  background: transparent;
+  border: 2px solid var(--navy);
+  color: var(--navy);
+  padding: 6px 10px;
+  margin-right:6px;
+  border-radius: 14px;
+  cursor:pointer;
+  font-weight:700;
+  font-size:0.78rem;
+}
+.quick-btn:hover { background: var(--navy); color: var(--white); }
+
+/* Botón de ayuda dentro de la burbuja */
+.help-btn {
+  display: inline-block;
+  margin-top: 8px;
+  background: var(--navy);
+  color: var(--white);
+  font-weight: 800;
+  font-size: 0.75rem;
+  padding: 6px 12px;
+  border-radius: 99px;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+.help-btn:hover { background: var(--green); }
+
+/* Imagen del bot */
+.helper-img {
+  width: 110px;
+  height: auto;
+  filter: drop-shadow(0 6px 18px rgba(0,0,0,0.18));
+  transition: transform 0.25s ease;
+  cursor: pointer;
+  animation: helper-float 3s ease-in-out infinite;
+  mix-blend-mode: multiply;
+}
+@keyframes helper-float {
+  0%,100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+.helper-img:hover { animation:none; transform: scale(1.06) rotate(-3deg); }
+
+/* Panel de chat */
+.helper-panel{
+  width: 320px;
+  max-height: 420px;
+  background: var(--white);
+  border: 2px solid var(--navy);
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(26,58,107,0.12);
+  overflow: hidden;
+  display:flex;
+  flex-direction:column;
+  margin-top:8px;
+}
+.helper-panel[aria-hidden="true"]{ display:none; }
+.panel-header{
+  padding:10px 12px;
+  background: linear-gradient(90deg, #f7fbff, #ffffff);
+  border-bottom:1px solid rgba(0,0,0,0.04);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.panel-body{
+  padding:10px;
+  overflow:auto;
+  flex:1 1 auto;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.msg {
+  max-width:80%;
+  padding:8px 10px;
+  border-radius:10px;
+  font-size:0.9rem;
+}
+.msg.user { align-self:flex-end; background:#e6f2ff; color:var(--navy); font-weight:700; }
+.msg.bot { align-self:flex-start; background:#f2f6f9; color:#223; }
+
+/* Form */
+.panel-form{
+  display:flex;
+  gap:8px;
+  padding:8px;
+  border-top:1px solid rgba(0,0,0,0.04);
+}
+.panel-form input{
+  flex:1 1 auto;
+  border:1px solid rgba(0,0,0,0.08);
+  padding:8px 10px;
+  border-radius:999px;
+}
+.panel-form button{
+  background:var(--navy);
+  color:var(--white);
+  border:none;
+  padding:8px 12px;
+  border-radius:999px;
+  cursor:pointer;
+  font-weight:700;
+}

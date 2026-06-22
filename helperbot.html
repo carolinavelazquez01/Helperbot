@@ -1,0 +1,35 @@
+<!-- helperbot.html
+  Incluir en tu layout (por ejemplo antes de </body>):
+  <link rel="stylesheet" href="/assets/helperbot.css">
+  <script defer src="/assets/helperbot.js"></script>
+  Añade la imagen en /assets/helperbot.svg (o cambia la ruta).
+-->
+<div class="helper-wrap" id="helperWrap" aria-live="polite">
+  <div class="helper-bubble" id="helperBubble" role="dialog" aria-label="HelperBot">
+    <button class="bubble-close" id="helperClose" aria-label="Cerrar ayuda">&times;</button>
+    <div class="bubble-content" id="bubbleContent">
+      <strong>Hola — soy HelperBot</strong>
+      <div class="bubble-text">¿Cómo te sientes hoy en clase?</div>
+      <div class="bubble-actions">
+        <button class="quick-btn" data-answer="Feliz">Feliz</button>
+        <button class="quick-btn" data-answer="Tranquilo">Tranquilo</button>
+        <button class="quick-btn" data-answer="Preocupado">Preocupado</button>
+      </div>
+      <a class="help-btn" id="openChat" href="#" role="button">Abrir chat</a>
+    </div>
+  </div>
+
+  <img src="/assets/helperbot.svg" alt="HelperBot" class="helper-img" id="helperImg" />
+
+  <div class="helper-panel" id="helperPanel" aria-hidden="true" role="dialog" aria-label="Chat con HelperBot">
+    <div class="panel-header">
+      <strong>HelperBot</strong>
+      <button class="bubble-close" id="panelClose" aria-label="Cerrar chat">&times;</button>
+    </div>
+    <div class="panel-body" id="panelBody" role="log"></div>
+    <form id="panelForm" class="panel-form" aria-label="Enviar mensaje">
+      <input id="panelInput" autocomplete="off" placeholder="Escribe aquí..." />
+      <button type="submit" id="panelSend">Enviar</button>
+    </form>
+  </div>
+</div>
